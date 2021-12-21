@@ -13,7 +13,6 @@
 
 #include "../I2S/I2S.h"
 #include "Mode.h"
-#include "PinConfig.h"
 
 class VGA : public I2S
 {
@@ -21,45 +20,9 @@ class VGA : public I2S
 	VGA(const int i2sIndex = 0);
 	void setLineBufferCount(int lineBufferCount);
 	bool init(const Mode &mode, const int *pinMap, const int bitCount, const int clockPin = -1);
-	virtual bool init(const Mode &mode, const PinConfig &pinConfig) = 0;
 
-	static const Mode MODE320x480;
 	static const Mode MODE320x240;
-	static const Mode MODE320x120;
-	static const Mode MODE320x400;
-	static const Mode MODE320x200;
-	static const Mode MODE360x400;
-	static const Mode MODE360x200;
-	static const Mode MODE360x350;
-	static const Mode MODE360x175;
-
-	static const Mode MODE320x350;
-	static const Mode MODE320x175;
-
-	static const Mode MODE400x300;
-	static const Mode MODE400x150;
-	static const Mode MODE400x100;
 	static const Mode MODE200x150;
-
-	static const Mode MODE500x480;
-	static const Mode MODE500x240;
-
-	static const Mode MODE1280x1024;
-	static const Mode MODE1280x960;
-	static const Mode MODE1280x800;
-	static const Mode MODE1024x768;
-	static const Mode MODE800x600;
-	static const Mode MODE720x400;
-	static const Mode MODE720x350;
-	static const Mode MODE640x480;
-	static const Mode MODE640x400;
-	static const Mode MODE640x350;
-
-	static const PinConfig VGAv01;
-	static const PinConfig VGABlackEdition;
-	static const PinConfig VGAWhiteEdition;
-	static const PinConfig PicoVGA;
-
 
 	Mode mode;
 

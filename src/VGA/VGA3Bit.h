@@ -34,14 +34,6 @@ class VGA3Bit : public VGA, public GraphicsR1G1B1A1X2S2Swapped
 		return VGA::init(mode, pinMap, 8, clockPin);
 	}
 
-	bool init(const Mode &mode, const PinConfig &pinConfig)
-	{
-		int pins[8];
-		pinConfig.fill3Bit(pins);
-		return VGA::init(mode, pins, 8, pinConfig.clock);
-	}
-
-
 	virtual void initSyncBits()
 	{
 		hsyncBitI = mode.hSyncPolarity ? 0x40 : 0;
@@ -98,13 +90,6 @@ class VGA3Bit : public VGA, public GraphicsR1G1B1A1X2S2Swapped
 		if(dmaBufferDescriptors)
 		for (int i = 0; i < yres * mode.vDiv; i++)
 			dmaBufferDescriptors[(mode.vFront + mode.vSync + mode.vBack + i) * 2 + 1].setBuffer(frontBuffer[i / mode.vDiv], mode.hRes * bytesPerSample());
-	}
-
-	virtual void scroll(int dy, Color color)
-	{
-		Graphics::scroll(dy, color);
-		if (frameBufferCount == 1)
-			show();
 	}
 
   protected:

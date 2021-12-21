@@ -1,3 +1,7 @@
+# WARNING
+
+This is a modified version of the ESP32Lib that only contains the vga portion of the library.
+
 # bitluni's ESP32Lib
 ESP32Lib is a collection features for the ESP32 including highest performance VGA graphics (sprites, 3D), sound and game controllers packed in an Arduino library.
 Check out https://youtube.com/bitlunislab for project updates

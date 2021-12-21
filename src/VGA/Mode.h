@@ -74,23 +74,6 @@ class Mode
 		return hFront + hSync + hBack + hRes;
 	}
 
-	Mode custom(int xres, int yres, int fixedYDivider = 0) const
-	{
-		xres = (xres + 3) & 0xfffffffc;
-		float f = float(xres) / hRes;
-		int hs = int(hSync * f + 3) & 0xfffffffc;
-		int hb = int((hSync + hBack - hs / f) * f + 3) & 0xfffffffc;
-		int hr = xres;
-		int hf = int((pixelsPerLine() - (hs + hb + hr) / f) * f + 3) & 0xfffffffc;
-		
-		int vd = fixedYDivider ? fixedYDivider : (vRes / yres);
-		int vr = yres * vd;
-		int vf = vFront + vRes / 2 - vr / 2;
-		int vb = vBack + vRes / 2 - (vr - vr / 2);
-		long pc = long(pixelClock * f);
-		return Mode(hf, hs, hb, hr, vf, vSync, vb, vr, vd, pc, hSyncPolarity, vSyncPolarity);
-	}
-
 	template<class Output>
 	void print(Output &output) const
 	{

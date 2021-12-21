@@ -21,8 +21,7 @@ class VGA6Bit : public VGA, public GraphicsR2G2B2S2Swapped
 	{
 	}
 
-
-	bool init(Mode &mode,
+	bool init(const Mode &mode,
 			  const int R0Pin, const int R1Pin,
 			  const int G0Pin, const int G1Pin,
 			  const int B0Pin, const int B1Pin,
@@ -36,27 +35,6 @@ class VGA6Bit : public VGA, public GraphicsR2G2B2S2Swapped
 		};
 
 		return VGA::init(mode, pinMap, 8, clockPin);
-	}
-
-	bool init(const Mode &mode, const int *redPins, const int *greenPins, const int *bluePins, const int hsyncPin, const int vsyncPin, const int clockPin = -1)
-	{
-		int pinMap[8];
-		for (int i = 0; i < 2; i++)
-		{
-			pinMap[i] = redPins[i];
-			pinMap[i + 2] = greenPins[i];
-			pinMap[i + 4] = bluePins[i];
-		}
-		pinMap[6] = hsyncPin;
-		pinMap[7] = vsyncPin;			
-		return VGA::init(mode, pinMap, 8, clockPin);
-	}
-
-	bool init(const Mode &mode, const PinConfig &pinConfig)
-	{
-		int pins[8];
-		pinConfig.fill6Bit(pins);
-		return VGA::init(mode, pins, 8, pinConfig.clock);
 	}
 
 	virtual void initSyncBits()
@@ -115,13 +93,6 @@ class VGA6Bit : public VGA, public GraphicsR2G2B2S2Swapped
 		if(dmaBufferDescriptors)
 		for (int i = 0; i < yres * mode.vDiv; i++)
 			dmaBufferDescriptors[(mode.vFront + mode.vSync + mode.vBack + i) * 2 + 1].setBuffer(frontBuffer[i / mode.vDiv], mode.hRes * bytesPerSample());
-	}
-
-	virtual void scroll(int dy, Color color)
-	{
-		Graphics::scroll(dy, color);
-		if (frameBufferCount == 1)
-			show();
 	}
 
   protected:
