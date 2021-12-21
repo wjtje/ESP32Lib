@@ -27,7 +27,7 @@ class Graphics
 	int xres;
 	int yres;
 
-	virtual void dotFast(int x, int y, Color color) = 0;
+	virtual void dot(int x, int y, Color color) = 0;
 	virtual Color** allocateFrameBuffer() = 0;
 	virtual Color** allocateFrameBuffer(int xres, int yres, Color value)
 	{

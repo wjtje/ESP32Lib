@@ -29,9 +29,10 @@ class GraphicsR2G2B2S2Swapped: public Graphics<unsigned char>
 		return ((r >> 6) & 0b11) | ((g >> 4) & 0b1100) | ((b >> 2) & 0b110000) | (a & 0b11000000);
 	}
 
-	virtual void dotFast(int x, int y, Color color)
+	virtual void dot(int x, int y, Color color)
 	{
-		backBuffer[y][x^2] = (color & RGBAXMask) | SBits;
+		if ((unsigned int)x < xres && (unsigned int)y < yres)
+			backBuffer[y][x^2] = (color & RGBAXMask) | SBits;
 	}
 
 	virtual Color** allocateFrameBuffer()
