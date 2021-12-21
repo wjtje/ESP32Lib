@@ -43,7 +43,6 @@ class VGA : public I2S
 	long hsyncBitI;
 
 	int totalLines;
-	volatile bool vSyncPassed;
 
 	void *vSyncInactiveBuffer;
 	void *vSyncActiveBuffer;
@@ -54,9 +53,4 @@ class VGA : public I2S
 	virtual void allocateLineBuffers();
 	virtual void allocateLineBuffers(void **frameBuffer);
 	virtual void propagateResolution(const int xres, const int yres) = 0;
-
-  protected:
-	virtual void interrupt();
-	virtual void vSync();
-	virtual void interruptPixelLine(int y, unsigned long *pixels, unsigned long syncBits);
 };

@@ -94,9 +94,4 @@ class VGA6Bit : public VGA, public GraphicsR2G2B2S2Swapped
 		for (int i = 0; i < yres * mode.vDiv; i++)
 			dmaBufferDescriptors[(mode.vFront + mode.vSync + mode.vBack + i) * 2 + 1].setBuffer(frontBuffer[i / mode.vDiv], mode.hRes * bytesPerSample());
 	}
-
-  protected:
-	virtual void interrupt()
-	{
-	}
 };
