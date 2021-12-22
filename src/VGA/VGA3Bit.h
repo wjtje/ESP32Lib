@@ -78,15 +78,11 @@ class VGA3Bit : public VGA, public GraphicsR1G1B1A1X2S2Swapped
 		VGA::allocateLineBuffers((void **)frameBuffers[0]);
 	}
 
-	virtual void show(bool vSync = false)
+	virtual void show()
 	{
 		if (!frameBufferCount)
 			return;
-		if (vSync)
-		{
-			//TODO read the I2S docs to find out
-		}
-		Graphics::show(vSync);
+		Graphics::show();
 		if(dmaBufferDescriptors)
 		for (int i = 0; i < yres * mode.vDiv; i++)
 			dmaBufferDescriptors[(mode.vFront + mode.vSync + mode.vBack + i) * 2 + 1].setBuffer(frontBuffer[i / mode.vDiv], mode.hRes * bytesPerSample());

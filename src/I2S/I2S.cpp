@@ -98,8 +98,6 @@ void I2S::resetFIFO() {
 
 DMABufferDescriptor *I2S::firstDescriptorAddress() const { return &dmaBufferDescriptors[0]; }
 
-bool I2S::useInterrupt() { return false; };
-
 void I2S::getClockSetting(long *sampleRate, int *n, int *a, int *b, int *div) {
   if (sampleRate)
     *sampleRate = 2000000;
@@ -233,9 +231,6 @@ bool I2S::initParallelOutputMode(const int *pinMap, long sampleRate, const int b
 
   // allocate disabled i2s interrupt
   const int interruptSource[] = {ETS_I2S0_INTR_SOURCE, ETS_I2S1_INTR_SOURCE};
-  if (useInterrupt())
-    esp_intr_alloc(interruptSource[i2sIndex], ESP_INTR_FLAG_INTRDISABLED | ESP_INTR_FLAG_LEVEL3 | ESP_INTR_FLAG_IRAM,
-                   &interruptStatic, this, &interruptHandle);
   return true;
 }
 

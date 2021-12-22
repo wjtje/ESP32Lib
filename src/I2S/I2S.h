@@ -48,7 +48,6 @@ class I2S {
   void (*interruptStaticChild)(void *arg) = 0;
 
  protected:
-  virtual bool useInterrupt();
   void setAPLLClock(long sampleRate, int bitCount);
   void setClock(long sampleRate, int bitCount, bool useAPLL = true);
 
