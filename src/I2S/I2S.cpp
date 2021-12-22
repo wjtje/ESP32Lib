@@ -71,11 +71,6 @@ void I2S::startTX() {
   i2s.out_link.start = 1;
   i2s.int_clr.val = i2s.int_raw.val;
   i2s.int_ena.val = 0;
-  if (useInterrupt()) {
-    i2s.int_ena.out_eof = 1;
-    // enable interrupt
-    esp_intr_enable(interruptHandle);
-  }
   // start transmission
   i2s.conf.tx_start = 1;
 }
